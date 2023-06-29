@@ -7,6 +7,8 @@ import { StoreModule } from '@ngrx/store';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MainComponent } from './components/main/main.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { MainComponent } from './components/main/main.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({}, {})
   ],
   providers: [],
