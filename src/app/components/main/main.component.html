@@ -9,15 +9,15 @@
   <form [formGroup]="form" class="row">
     <div class="col-8">
       <label for="titleMovie" class="visually-hidden">Nome do Filme</label>
-      <input type="input" class="form-control" id="titleMovie" formControlName="titleMovie" placeholder="Nome do Filme">
+      <input type="input" class="form-control" id="titleMovie" formControlName="titleMovie" #title placeholder="Nome do Filme">
     </div>
     <div class="col-auto">
-      <button class="btn btn-primary mb-3" (click)="onSubmit()"> Search </button>
+      <button class="btn btn-success mb-3" (click)="onSubmit()" [disabled]="form.invalid"> Search </button>
     </div>
 
     <div class="col-auto">
 
-      <button class="btn btn-secondary mb-3" (click)="onCancel()"> Reset</button>
+      <button class="btn btn-secondary mb-3" (click)="onReset()" [disabled]="form.invalid"> Reset</button>
     </div>
   </form>
 </section>

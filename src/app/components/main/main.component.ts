@@ -26,7 +26,9 @@ export class MainComponent implements OnInit {
 
   onError(errorMsg: string) {
     console.log('error exibir dialog', errorMsg)
-
+    // this.dialog.open(ErrorDialogComponent, {
+    //   data: errorMsg
+    // })
   }
 
   onSubmit() {
@@ -37,9 +39,8 @@ export class MainComponent implements OnInit {
         return of([])
       })
     )
-    console.log(this.movie$.subscribe())
   }
-  onCancel() {
-    console.log('limpando')
+  onReset() {
+    this.form.get('titleMovie')?.reset()
   }
 }
