@@ -6,18 +6,18 @@
 </section>
 
 <section>
-  <form class="row">
+  <form [formGroup]="form" class="row">
     <div class="col-8">
-      <label for="movieName" class="visually-hidden">Nome do Filme</label>
-      <input type="input" class="form-control" id="movieName" placeholder="Nome do Filme">
+      <label for="titleMovie" class="visually-hidden">Nome do Filme</label>
+      <input type="input" class="form-control" id="titleMovie" formControlName="titleMovie" placeholder="Nome do Filme">
     </div>
     <div class="col-auto">
-      <button type="submit" class="btn btn-primary mb-3"> Search </button>
+      <button class="btn btn-primary mb-3" (click)="onSubmit()"> Search </button>
     </div>
 
     <div class="col-auto">
 
-      <button type="submit" class="btn btn-secondary mb-3"> Reset</button>
+      <button class="btn btn-secondary mb-3" (click)="onCancel()"> Reset</button>
     </div>
   </form>
 </section>
