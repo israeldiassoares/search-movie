@@ -9,7 +9,7 @@
   <form [formGroup]="form" class="row">
     <div class="col-8">
       <label for="titleMovie" class="visually-hidden">Nome do Filme</label>
-      <input type="input" class="form-control" id="titleMovie" formControlName="titleMovie" #title placeholder="Nome do Filme">
+      <input type="input" class="form-control" id="titleMovie" formControlName="titleMovie" [(ngModel)]="title" placeholder="Nome do Filme">
     </div>
     <div class="col-auto">
       <button class="btn btn-success mb-3" (click)="onSubmit()" [disabled]="form.invalid"> Search </button>
@@ -22,9 +22,15 @@
   </form>
 </section>
 
+<section *ngIf="isLoading$ | async ">
+  <p>Carregando ...</p>
+</section>
+<app-error-dialog *ngIf="error$ | async"></app-error-dialog>
+
+<!-- Componentizar Para Movie Component passando as dependecias -->
 <section class="row">
   <div class="col-8">
-    <h3>Movie Title</h3>
+    <h3 *ngIf="movie$ | async">Movie Title</h3>
     <p>Mussum Ipsum, cacilds vidis litro abertis. Tá deprimidis, eu conheço uma cachacis que pode alegrar sua vidis.Praesent malesuada urna nisi, quis volutpat erat hendrerit non. Nam vulputate
       dapibus.Posuere libero varius. Nullam a nisl ut ante blandit hendrerit. Aenean sit amet nisi.Suco de cevadiss deixa as pessoas mais interessantis.
 
