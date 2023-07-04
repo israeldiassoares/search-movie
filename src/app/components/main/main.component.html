@@ -1,8 +1,6 @@
-<section>
-  <h1> Title </h1>
-  <p>Mussum Ipsum, cacilds vidis litro abertis. Copo furadis é disculpa de bebadis, arcu quam euismod magna.Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu levo!In elementis mé
-    pra
-    quem é amistosis quis leo.Per aumento de cachacis, eu reclamis.</p>
+<section class="text-center">
+  <h1> Pesquise Por filmes e series </h1>
+  <p>Insira o nome da Serie ou filme para verificar mais informações e detalhes.</p>
 </section>
 
 <section>
@@ -11,13 +9,14 @@
       <label for="titleMovie" class="visually-hidden">Nome do Filme</label>
       <input type="input" class="form-control" id="titleMovie" formControlName="titleMovie" [(ngModel)]="title" placeholder="Nome do Filme">
     </div>
-    <div class="col-auto">
-      <button class="btn btn-success mb-3" (click)="onSubmit()" [disabled]="form.invalid"> Search </button>
-    </div>
+    <div class="col-4 d-md-flex">
+      <div class="col-6">
+        <button class="btn btn-success mb-3" (click)="onSubmit()" [disabled]="form.invalid"> Search </button>
+      </div>
 
-    <div class="col-auto">
-
-      <button class="btn btn-secondary mb-3" (click)="onReset()" [disabled]="form.invalid"> Reset</button>
+      <div class="col-6">
+        <button class="btn btn-secondary mb-3" (click)="onReset()" [disabled]="form.invalid"> Reset</button>
+      </div>
     </div>
   </form>
 </section>
@@ -25,29 +24,11 @@
 <section *ngIf="isLoading$ | async ">
   <p>Carregando ...</p>
 </section>
-<app-error-dialog *ngIf="error$ | async"></app-error-dialog>
+<div *ngIf="error$ | async as error">
+  <app-error-dialog [errorInfo]="error"></app-error-dialog>
+</div>
 
 <!-- Componentizar Para Movie Component passando as dependecias -->
-<section class="row">
-  <div class="col-8">
-    <h3 *ngIf="movie$ | async">Movie Title</h3>
-    <p>Mussum Ipsum, cacilds vidis litro abertis. Tá deprimidis, eu conheço uma cachacis que pode alegrar sua vidis.Praesent malesuada urna nisi, quis volutpat erat hendrerit non. Nam vulputate
-      dapibus.Posuere libero varius. Nullam a nisl ut ante blandit hendrerit. Aenean sit amet nisi.Suco de cevadiss deixa as pessoas mais interessantis.
-
-      Vehicula non. Ut sed ex eros. Vivamus sit amet nibh non tellus tristique interdum.Aenean aliquam molestie leo, vitae iaculis nisl.Paisis, filhis, espiritis santis.Nec orci ornare consequat.
-      Praesent
-      lacinia ultrices consectetur. Sed non ipsum felis.</p>
-  </div>
-  <aside class="col-4">
-    <picture>
-      <img src="https://picsum.photos/200/300" alt="movieBanner" />
-    </picture>
-  </aside>
-
-  <h5>Actor: </h5>
-  <div class="d-flex justify-between">
-    <h5>Review</h5>
-    <i class="bi bi-star"></i>
-    <i class="bi bi-star-half"></i>
-  </div>
-</section>
+<div *ngIf="movie$ | async as movie">
+  <app-movie [movieObject]="movie">{{movie.Title}}</app-movie>
+</div>

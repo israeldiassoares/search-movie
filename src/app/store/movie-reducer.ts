@@ -3,7 +3,7 @@ import { MovieState } from './../model/movieState';
 import * as MovieActions from './movie-actions'
 export const initialState: MovieState = {
   isLoading: false,
-  movie: [ {
+  movie: {
     Title: '',
     Year: '',
     Rated: '',
@@ -26,8 +26,11 @@ export const initialState: MovieState = {
     Type: '',
     totalSeasons: '',
     Response: ''
-  } ],
-  error: null
+  },
+  error: {
+    Error: '',
+    Response: ''
+  }
 }
 
 export const reducers = createReducer(initialState,
@@ -39,5 +42,9 @@ export const reducers = createReducer(initialState,
     movie: action.movie
   })),
 
-  on(MovieActions.getMovieFailure, (state, action) => ({ ...state, isLoading: false, error: action.error }))
+  on(MovieActions.getMovieFailure, (state, action) => ({
+    ...state,
+    isLoading: false,
+    error: action.error
+  }))
 )
