@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { first, Observable, tap } from 'rxjs';
+import { catchError, first, Observable, of, tap } from 'rxjs';
 import { Movie } from 'src/app/model/movie';
-import { getMovieSuccess } from 'src/app/store/movie-actions';
+import { Error } from 'src/app/model/error';
+
+import { getMovieFailure, getMovieSuccess } from 'src/app/store/movie-actions';
 import { AppStateInterface } from 'src/app/types/AppStateInterface';
 
 @Injectable({
@@ -20,10 +22,10 @@ export class MovieService {
   ) { }
 
   getMovieByTitle(titleMovie: { titleMovie: string | null; }): Observable<Movie> {
-    console.log('titleMovie', titleMovie.titleMovie)
     return this.httpClient.get<Movie>(`${this.baseUrl}/?apikey=${this.apiKey}&t=${titleMovie.titleMovie?.toString()}`).pipe(
       first(),
       tap((movie: Movie) => this.store.dispatch(getMovieSuccess({ movie })),
+        catchError((error: Error) => of(this.store.dispatch(getMovieFailure({ error }))))
       ))
   }
 }

@@ -3,6 +3,7 @@
   <p>Insira o nome da Serie ou filme para verificar mais informações e detalhes.</p>
 </section>
 
+<!-- Search component -->
 <section>
   <form [formGroup]="form" class="row">
     <div class="col-8">
@@ -21,14 +22,17 @@
   </form>
 </section>
 
+<!-- Loading Component -->
 <section *ngIf="isLoading$ | async ">
   <p>Carregando ...</p>
 </section>
-<div *ngIf="error$ | async as error">
-  <app-error-dialog [errorInfo]="error"></app-error-dialog>
+
+<!-- Error component -->
+<div *ngIf="error$ | async as erro">
+  <app-error-dialog [errorInfo]="erro"></app-error-dialog>
 </div>
 
-<!-- Componentizar Para Movie Component passando as dependecias -->
+<!-- Movie Component passando as dependecias -->
 <div *ngIf="movie$ | async as movie">
-  <app-movie [movieObject]="movie">{{movie.Title}}</app-movie>
+  <app-movie [movieObject]="movie"></app-movie>
 </div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
 
 import { MovieService } from '../services/movie/movie.service';
 import * as MovieActions from './movie-actions';
@@ -11,8 +11,7 @@ export class MovieEffects {
 
   getMovie$ = createEffect(() => this.actions$.pipe(
     ofType(MovieActions.getMovie),
-    mergeMap((action) => {
-      console.log('effect', action.titleMovie)
+    switchMap((action) => {
       return this.movieService.getMovieByTitle(MovieActions.getMovie({ titleMovie: action.titleMovie }))
         .pipe(map(movie => MovieActions.getMovieSuccess({ movie })),
           catchError((error) => {
